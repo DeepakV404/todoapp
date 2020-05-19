@@ -21,6 +21,10 @@
 .faicons{
     margin: 0 5px;
     font-size: 15px;
-    
 
+}
+.list p span .faicons1{
+    position: relative;
+    right: 35px;
+    cursor: pointer;
 }

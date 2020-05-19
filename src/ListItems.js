@@ -1,6 +1,7 @@
 import React from 'react';
 import './ListItems.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEdit, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 
 function ListItems(props){
     const items = props.items;
@@ -12,8 +13,11 @@ function ListItems(props){
                     <span>
                         <FontAwesomeIcon className='faicons' icon="trash"/>
                      </span>
+                     <span>
+                        <FontAwesomeIcon className='faicons1' icon={faPencilAlt}/>
+                     </span>
                 </p>
-            git</div>
+            </div>
             )
     })
         
