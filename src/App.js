@@ -1,6 +1,11 @@
 import React,{Component} from 'react';
 import logo from './logo.svg';
 import './App.css';
+import ListItems from './ListItems';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
+
+library.add(faTrash);
 
 class App extends Component{
   constructor(props){
@@ -31,7 +36,16 @@ class App extends Component{
   addItem(e){
     e.preventDefault();
     const newitem = this.state.currentItem;
-    console.log(newitem);
+    if(newitem.text !== ""){
+      const items = [...this.state.items, newitem];
+      this.setState({
+        items: items,
+        currentItem:{
+          text:"",
+          key:"",
+        }
+      })
+    }
   }
 
   render(){
@@ -44,6 +58,7 @@ class App extends Component{
           <button type="submit">Add</button>
         </form>
       </header>
+      <ListItems items = {this.state.items}></ListItems>
     </div>
   );
 }
