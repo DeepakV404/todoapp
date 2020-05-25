@@ -5,6 +5,8 @@ import { faEdit, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 
 function ListItems(props){
     const items = props.items;
+    const handleEdit = props.handleEdit;
+    const deleteItem = props.deleteItem;
     const listItems = items.map(item =>
    {
        return( 
@@ -12,7 +14,7 @@ function ListItems(props){
                 <p>{item.text}
                     <span>
                         <FontAwesomeIcon className='faicons' icon="trash" onClick={ () => {props.deleteItem(item.key)}} />
-                        <FontAwesomeIcon className='faicons1' icon={faPencilAlt}/>   
+                        <FontAwesomeIcon className='faicons1' icon={faPencilAlt} onClick={ () => {handleEdit(item.key)}}/>   
                     </span>
                 </p>
             </div>

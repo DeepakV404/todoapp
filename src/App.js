@@ -14,6 +14,8 @@ class App extends Component{
     
     this.state={
       items:[],
+      editItem:false,
+      key:Date.now(),
       currentItem:{
         text:"",
         key:"",
@@ -23,6 +25,7 @@ class App extends Component{
     this.handleInput = this.handleInput.bind(this);
     this.addItem = this.addItem.bind(this);
     this.deleteItem = this.deleteItem.bind(this);
+    
 
   }
 
@@ -42,6 +45,7 @@ class App extends Component{
       const items = [...this.state.items, newitem];
       this.setState({
         items: items,
+        editItem:false,
         currentItem:{
           text:"",
           key:"",
@@ -56,6 +60,22 @@ class App extends Component{
       items: filterItems
     })
   }
+  handleEdit = key  => {
+    const filterItems = this.state.items.filter(item => 
+    item.key !== key);
+    
+const selectedItem = this.state.items.find(item => item.key === key);
+console.log(selectedItem);
+    this.setState({
+      items:filterItems,
+      editItem:true,
+      key:key,
+      currentItem:{
+        text: selectedItem.text ,
+      }
+    });
+
+  }
   
 
   render(){
@@ -63,12 +83,24 @@ class App extends Component{
     <div className="App">
       <header>
         <form id = "to-do-form" onSubmit={this.addItem}>
-          <input type="text" placeholder="Say something" value={this.state.currentItem.text}
-          onChange={this.handleInput}/>
-          <button type="submit">Add</button>
+          <input 
+          type="text" 
+          placeholder="Say something" 
+          value={this.state.currentItem.text}
+          onChange={this.handleInput}
+          editItem={this.state.editItem}
+          />
+          <button type="submit">
+          {this.state.editItem ? "Edit" : "Add"}
+          </button>
         </form>
       </header>
-      <ListItems items = {this.state.items} deleteItem = {this.deleteItem}>
+      <ListItems 
+         items = {this.state.items}
+         deleteItem = {this.deleteItem}
+         handleEdit = {this.handleEdit}
+         
+         >
       </ListItems>
     </div>
   );
